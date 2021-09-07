@@ -122,6 +122,36 @@ body {
     width: 22px;
 }
 
-.close{
+.d-none {
     display: none;
+}
+
+#popup {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#popup-body {
+    padding: 1em 2em;
+    border-radius: 1em;
+    width: 50vw;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.light #popup-body {
+    background-color: #fefefe;
+}
+
+.dark #popup-body {
+    background-color: #212121;
 }

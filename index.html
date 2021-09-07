@@ -31,7 +31,11 @@
 
 <section id="third">
     <h1>Exercise third</h1>
-    <button id="citation">Generate citation</button>
+    <button id="popupButton">Generate citation</button>
+    <div id="popup" style="display: none;"></div>
+    <div id="popup-body" style="display: none;">
+        <h1>Your citation</h1>
+    </div>
 </section>
 
 <section id="fourth">
@@ -48,7 +52,7 @@
             <span></span>
         </div>
     </div>
-    <ul id="menu" class="close">
+    <ul id="menu" class="d-none">
         <li>One</li>
         <li>Two</li>
         <li>Three</li>
@@ -93,7 +97,32 @@
     secondExo.appendChild(resultParagraph)
 
     /* EXERCISE THREE */
+    let popupButton = document.getElementById('popupButton')
+    let popup = document.getElementById('popup')
+    let popupBody = document.getElementById('popup-body')
+    let citationParagraph = document.createElement('p')
+    popupBody.appendChild(citationParagraph)
 
+    let citations = [
+        'The truth will set you free',
+        `There's no place like home`,
+        'Three can keep a secret, if two of them are dead',
+        'Tis better to have loved and lost than never to have loved at all',
+        'Eighty percent of success is showing up',
+        'Go ahead, make my day'
+    ]
+
+    let generateCitation = () => {
+        citationParagraph.textContent = citations[Math.floor(Math.random() * citations.length)]
+    }
+
+    let popupAction = () => {
+        if (popup.style.display === 'none') (popup.style.display = 'block') && (popupBody.style.display = 'block') && generateCitation()
+        else (popup.style.display = 'none') && (popupBody.style.display = 'none')
+    }
+
+    popupButton.addEventListener('click', popupAction)
+    popup.addEventListener('click', popupAction)
 
     /* EXERCISE FOUR */
     let themeAction = document.getElementById('themeAction')
@@ -112,7 +141,7 @@
     let list = document.querySelector('ul')
 
     let burgerAction = () => {
-        if(burgerInput.checked) list.style.display = 'block'
+        if (burgerInput.checked) list.style.display = 'block'
         else list.style.display = 'none'
     }
 
