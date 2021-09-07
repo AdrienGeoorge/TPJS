@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light">
+<section id="one">
+    <h1>Exercise one</h1>
+    <button id="generate">Generate password</button>
+</section>
+
+<section id="two">
+    <h1>Exercise two</h1>
+    <form action="#" method="post">
+        <div>
+            <label for="weather">Temperature</label>
+            <input type="number" id="weather" value="0" step="1">
+        </div>
+        <div>
+            <p><b>Choose your current weather unity</b></p>
+            <label for="celsius">Celsius</label>
+            <input type="radio" id="celsius" value="C" name="temperature" checked>
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="radio" id="fahrenheit" value="F" name="temperature">
+        </div>
+        <button id="calcButton">Calculate</button>
+    </form>
+</section>
+
+<section id="third">
+    <h1>Exercise third</h1>
+    <button id="citation">Generate citation</button>
+</section>
+
+<section id="fourth">
+    <h1>Exercise fourth</h1>
+    <button id="themeAction">Change theme</button>
+</section>
+
+<section id="fifth">
+    <h1>Exercise fifth</h1>
+    <div id="burger">
+        <input id="burger-btn" type="checkbox" aria-label="burger"/>
+        <div>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <ul id="menu" class="close">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+</section>
+<script>
+    /* EXERCISE ONE */
+    let firstExo = document.getElementById('one')
+    let generateButton = document.getElementById('generate')
+    let passwordParagraph = document.createElement('p')
+
+    let generatePassword = () => {
+        let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()0123456789'
+        let password
+        do {
+            password = ''
+            for (let i = 0; i < 10; i++) {
+                let random = Math.floor(Math.random() * chars.length)
+                password += chars.slice(random, random + 1)
+            }
+        } while (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/.test(password) === false)
+        passwordParagraph.textContent = password
+    }
+
+    generateButton.addEventListener('click', generatePassword)
+    firstExo.appendChild(passwordParagraph)
+
+    /* EXERCISE TWO */
+    let secondExo = document.getElementById('two')
+    let calcButton = document.getElementById('calcButton')
+    let resultParagraph = document.createElement('p')
+
+    let calcTemperature = (ev) => {
+        ev.preventDefault()
+        let temperature = document.querySelector(`input[name='temperature']:checked`).value
+        let weather = document.getElementById('weather').value
+        if (temperature === 'C') resultParagraph.textContent = `${((weather * 9 / 5) + 32).toFixed(2).toString()}°F`
+        else resultParagraph.textContent = `${((weather - 32) * 5 / 9).toFixed(1).toString()}°C`
+    }
+
+    calcButton.addEventListener('click', ev => calcTemperature(ev))
+    secondExo.appendChild(resultParagraph)
+
+    /* EXERCISE THREE */
+
+
+    /* EXERCISE FOUR */
+    let themeAction = document.getElementById('themeAction')
+    let body = document.querySelector('body')
+
+    let changeTheme = () => {
+        if (body.classList.contains('light')) body.classList.remove('light') || body.classList.add('dark')
+        else body.classList.remove('dark') || body.classList.add('light')
+    }
+
+    themeAction.addEventListener('click', changeTheme)
+
+    /* EXERCISE FIVE */
+    let burgerButton = document.getElementById('burger')
+    let burgerInput = document.getElementById('burger-btn');
+    let list = document.querySelector('ul')
+
+    let burgerAction = () => {
+        if(burgerInput.checked) list.style.display = 'block'
+        else list.style.display = 'none'
+    }
+
+    burgerButton.addEventListener('click', burgerAction)
+</script>
+</body>
+</html>
